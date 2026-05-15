@@ -5,18 +5,15 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
 // ─── Supabase ────────────────────────────────────────────────────────────────
-// Cloudflare Pages fix: usar valores directos si las env vars no están disponibles
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xldsnyacwndbmbfcaywn.supabase.co'
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsZHNueWFjd25kYm1iZmNheXduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczOTgyMzgsImV4cCI6MjA5Mjk3NDIzOH0.OQJK3bOowrIwNkRBTEz2pyzT4d8WJV1TW50AnuV48g4'
-
-console.log('DEBUG - URL:', SUPABASE_URL)
-console.log('DEBUG - KEY existe:', SUPABASE_ANON_KEY ? 'SI' : 'NO')
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+// Usar valores directos (las env vars no funcionan en Cloudflare Pages build)
+const supabase = createClient(
+  'https://xldsnyacwndbmbfcaywn.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsZHNueWFjd25kYm1iZmNheXduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczOTgyMzgsImV4cCI6MjA5Mjk3NDIzOH0.OQJK3bOowrIwNkRBTEz2pyzT4d8WJV1TW50AnuV48g4'
+)
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const SECCIONES = Object.keys(ESTUDIANTES).sort()
-const PIN_DEFAULT = import.meta.env.VITE_DIRECTOR_PIN || 'musical80'
+const PIN_DEFAULT = 'musical80'
 const TOTAL_ESTUDIANTES = Object.values(ESTUDIANTES).reduce((acc, arr) => acc + arr.length, 0)
 
 const shortName = (sec) =>
