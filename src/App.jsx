@@ -5,6 +5,10 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
 // ─── Supabase ────────────────────────────────────────────────────────────────
+console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL)
+console.log('VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'EXISTE' : 'UNDEFINED')
+console.log('Todas las env vars:', import.meta.env)
+
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_ANON_KEY
