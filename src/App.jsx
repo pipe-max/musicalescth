@@ -5,14 +5,11 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
 // ─── Supabase ────────────────────────────────────────────────────────────────
-console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL)
-console.log('VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? 'EXISTE' : 'UNDEFINED')
-console.log('Todas las env vars:', import.meta.env)
+// Cloudflare Pages fix: usar valores directos si las env vars no están disponibles
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xldsnyacwndbmbfcaywn.supabase.co'
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsZHNueWFjd25kYm1iZmNheXduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczOTgyMzgsImV4cCI6MjA5Mjk3NDIzOH0.OQJK3bOowrIwNkRBTEz2pyzT4d8WJV1TW50AnuV48g4'
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-)
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 // ─── Constantes ──────────────────────────────────────────────────────────────
 const SECCIONES = Object.keys(ESTUDIANTES).sort()
